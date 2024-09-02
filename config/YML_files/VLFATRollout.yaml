@@ -1,0 +1,74 @@
+# store_file.yaml file contents:
+
+- model_inputs:
+    model_type: ViT_VaR
+    num_classes: 2
+    image_size: 224
+    num_frames: 25
+    channels: 3
+    weighted: true
+    num_test: 10
+    filter_tokens: true
+    reserve_token_nums: 81
+    discard_ratio: 0.9
+    head_fusion: mean
+
+    ViT_VaR:
+      model_type: vit_base_patch16_224
+      pretrained: false
+      patch_size: 16
+      embedd_dim: 768
+      interpolation_type: linear # 'nearest', 'linear'
+      depth: 12
+      heads: 3
+
+- dataset:
+    # the .csv file includes the path for the volumes and also the corresponding label
+    dataset_name: OLIVES
+    annotation_path_train: exchange/Marzieh/ViT3D_extension_development_rollout/annotations/OLIVES/OLIVES_train_complete.csv
+    annotation_path_test: exchange/Marzieh/ViT3D_extension_development_rollout/annotations/OLIVES/OLIVES_test_complete.csv
+    annotation_path_val: exchange/Marzieh/ViT3D_extension_development_rollout/annotations/OLIVES/OLIVES_val_complete.csv
+    shuffle: True
+    num_workers: 10
+    # if you set the loader_type to all, the model will use all the slices in the volume for training. Note that this only works for ViT_VaR model
+    loader_type: random_middle # available types:random_middle random, variable, fixed, central
+
+- train_config:
+      train: true
+      pretrain: false
+      resume: false
+      allow_size_mismatch: true
+      load_path: ./
+      checkpoint: ./
+      # rollout_warmup_epoch is the number of epochs for the rollout warmup, i.e. we train the model using the [cls] token as slice representation,
+      #  this will help the model to better recognize the retina in the B-scan which is important for better filtering the non-important tokens
+      rollout_warmup_epoch: 1
+      num_epochs: 2
+      batch_size: 1
+      use_gpu: true
+      init_lr: 6.0e-6
+      max_lr: 0.003
+      min_lr: 0.003
+      warmup_lr: 0.003
+      warmup_steps: -1
+      warmup_epochs: 10
+      T_mult: 1
+      eta_min: 0
+      last_epoch: -1
+      update_freq: 1
+      base_lr_cyclic: 3.0e-15
+      optimizer: adamw
+      scheduler: cosine_with_warmup
+      step_coeff: 8
+      momentum: 0.9
+      weight_decay: 0.02
+      weight_decay_end: none
+      mixups_alpha: 0.
+      rand_aug: true
+      rand_test: false
+      center_loss: false
+
+- log:
+    save_path: /exchange/Marzieh/VLFATRollOut/log
+
+- where : /optima/

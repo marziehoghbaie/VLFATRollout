@@ -1,0 +1,16 @@
+#!/bin/sh
+#SBATCH --nodes=1
+#SBATCH --gres=gpu:1
+#Email notification
+#SBATCH --mail-type=FAIL
+#SBATCH --qos=normal
+#SBATCH --ntasks=10
+#SBATCH --mem=128G
+#SBATCH --time=3-00:00:00
+#SBATCH --job-name=TRAIN
+
+cd /VLFATRollOut/sigularity_conf
+
+echo "!!!!!!START!!!!!!"
+singularity exec --nv --bind path-on-host/VLFATRollOut:path-in-container/VLFATRollOut sing_file.sif /bin/bash /VLFATRollOut/run_CMDs/ViT.sh
+echo "!!!!!!FINISHED!!!!!!"
