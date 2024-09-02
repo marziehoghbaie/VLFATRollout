@@ -211,7 +211,7 @@ class FEViViT(nn.Module):
         num_patches = (image_size // patch_size) ** 2
         patch_dim = in_channels * patch_size ** 2
         self.to_patch_embedding = nn.Sequential(
-            # todo you can here use tublet patching method inorder to create some interaction among frames
+            # you can here use tublet patching method inorder to create some interaction among frames
             Rearrange('b t c (h p1) (w p2) -> b t (h w) (p1 p2 c)', p1=patch_size, p2=patch_size),
             nn.Linear(patch_dim, dim),
         )

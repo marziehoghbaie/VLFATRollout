@@ -2,8 +2,6 @@ import torch
 import torch.optim as optim
 from adan_pytorch import Adan
 
-
-# ToDo Add SAM and Ranger optimizer
 def create_optimizer(model, train_config):
     if train_config['optimizer'] == 'sgd':
         optimizer = torch.optim.SGD(model.parameters(), lr=train_config['init_lr'],
