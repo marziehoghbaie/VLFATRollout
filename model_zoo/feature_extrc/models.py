@@ -63,7 +63,7 @@ class ViT_VaR(nn.Module):
                                   num_patch_new,
                                   mode=self.interpolation_type).transpose(-2, -1)
             self.temporal_pos_encodings = nn.Parameter(tmp)
-            trunc_normal_(self.temporal_pos_encodings, std=.02)
+            #trunc_normal_(self.temporal_pos_encodings, std=.02)
 
         return self.temporal_pos_encodings
 
@@ -188,7 +188,7 @@ class ViT_baseline_thickness(nn.Module):
                                   num_patch_new,
                                   mode=self.interpolation_type).transpose(-2, -1)
             self.temporal_pos_encodings = nn.Parameter(tmp)
-            trunc_normal_(self.temporal_pos_encodings, std=.02)
+            #trunc_normal_(self.temporal_pos_encodings, std=.02)
 
         return self.temporal_pos_encodings
     def __call__(self, x, thickness, return_features=False):
