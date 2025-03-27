@@ -1,6 +1,6 @@
 # VLFATRollOut
 This repository contains the source code of the following paper:
-**[VLFATRollout: Fully Transformer-based Classifier for Retinal OCT Volumes](https://papers.ssrn.com/sol3/papers.cfm?abstract_id=4870170)**, Marzieh Oghbaie, Teresa Araujo, Ursula Schmidt-Erfurth, Hrvoje Bogunovic
+**[VLFATRollout: Fully Transformer-based Classifier for Retinal OCT Volumes](https://www.sciencedirect.com/science/article/pii/S0895611124001290)**, Marzieh Oghbaie, Teresa Araujo, Ursula Schmidt-Erfurth, Hrvoje Bogunovic
 
 The proposed network deploys Transformers for volume classification that is able to handle variable volume resolutions both at development and inference time.  
 ## Proposed Approach for 3D volume Classification
